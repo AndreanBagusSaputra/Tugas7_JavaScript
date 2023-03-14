@@ -16,18 +16,42 @@
             <th>Nama</th>
             <th>Nilai</th>
             <th>Keterangan</th>
+            <th>Grade</th>
+            <th>Predikat</th>
         </tr>
     </thead>
     <tbody>
         <script>
-            var no = 1;
+            var no = 1, warna;
             for(p of person){
                 let ket = (p.nilai >= 80)? "Lulus" : "Tidak Lulus"
+                    warna = (no % 2 == 0)? 'green' : 'green';
+                
+                let grade = (p.nilai == 0)? "" : "";
+                if(grade > 90 && grade <= 100) grade = "A";
+                else if(grade > 80 && grade <= 89) grade = "B";
+                else if(grade > 70 && grade <= 79) grade = "C";
+                else if(grade > 60 && grade <= 69) grade = "D";
+                else if(grade >= 50 && grade <= 59) grade = "E"
+                else grade = "";
+                
+                switch(grade){
+                    case "A" : pred = "Sangat Baik"; break;
+                    case "B" : pred = "Baik"; break;
+                    case "C" : pred = "Cukup"; break;
+                    case "D" : pred = "Kurang"; break;
+                    case "E" : pred = "Sangat Kurang"; break;
+                    default : pred = ""; break;
+
+                }
+
                 document.write(`<tr bgcolor="$(warna)">'
                     <td>${no++} 1</td>
                     <td>${p.nama}</td>
                     <td>${p.nilai}</td>
                     <td>${ket}</td>
+                    <td>${grade}</td>
+                    <td>${pred}</td>
                 </tr>`)
             }
         </script>
